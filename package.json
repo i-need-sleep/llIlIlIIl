@@ -1,0 +1,20 @@
+{
+  "name": "the_thing",
+  "version": "1.0.0",
+  "description": "An early proof of concept of the thing. More things are to be added if the thing prooves to server the function typically expected of the thing.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "peer": "^0.6.1",
+    "peerjs": "^1.3.2"
+  },
+  "engines": {
+    "node": "12.19.0"
+  }
+}
