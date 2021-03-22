@@ -1,6 +1,8 @@
 var me = new Peer({
     host: '/',
-    path: '/peerjs/broker'
+    path: '/peerjs/broker',  // Yes, I am paying for the Twilio STUN servers...
+    config:{ 'iceServers': "SECRET :/",
+         'sdpSemantics': 'unified-plan' }
     });
 
 me.on('open', function(id) {
@@ -14,7 +16,7 @@ var connected = false;
 
 connect.onclick = function(){
     conn = me.connect(target_id.value);
-    connect_msg.innerHTML = "WOOHOO CONNECTED!!!!!OIFWEHUFHV*DSONE"
+    connect_msg.innerHTML = "Connection Initiated"
     connected = true;
 }
 
