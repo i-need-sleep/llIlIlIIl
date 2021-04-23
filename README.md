@@ -1,5 +1,4 @@
 # llIlIlIIl
-~~This is backend repo for an implementation of the thing. More things are being added. ~~
 ## The general repo for llIlIlIIl (also referred to as "thething"), a web-based multi-client chat system featuring
 * Group chatting in a public lobby
 * Private P2P messaging and video calling through invitation and acceptance
