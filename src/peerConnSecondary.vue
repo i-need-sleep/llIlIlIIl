@@ -1,41 +1,5 @@
 <template>
-  <div class='view peerconn' id='peerconn'>
-    <header>
-      <h1>Your Peer Connection.  <br>
-          <span>Trust me, it's private :/</span>
-          <button id=back @click="peerConn_exit">Close</button>
-      </h1>
-    </header>
-
-	<section class="chat-box">
-      <div 
-        v-for="message in messages" 
-        :key="message.key" 
-        :class="(message.username == state.username ? 'message current-user' : 'message')">
-        <div class="message-inner">
-          <div class="username">{{ message.username }}</div>
-          <div class="content">{{ message.content }}</div>
-        </div>
-      </div>
-      <video id="video_ele" autoplay></video>
-    </section>
-
-    <footer>
-      <div v-if="messages.length">
-      <button @click="video_call" id=disconnect_call>Video Call</button>
-      <form  @submit.prevent="SendMessage">
-        <input 
-          type="text" 
-          v-model="inputMessage" 
-          placeholder="Write a message..." />
-        <input 
-          type="submit" 
-          value="Send" />
-      </form>
-      </div>
-      <p v-else>Connecting...</p>
-    </footer>
-  </div>
+  <div></div>
 </template>
 
 <script>
@@ -66,7 +30,6 @@ export default {
         messages.push({username: message.name, content: message.message}
         )}
         this.conn = conn
-		this.$emit('emit_to_branch',message)
     },
     unsent() {
         let messages = this.messages
@@ -132,9 +95,9 @@ export default {
     props.peer_info.me.on('connection', (conn_in) => {
     conn_in.on('data', (data) => {
 		emit('peerConn_newMsg', {name: props.peer_info.name, len: messages.length})
-        if (props.peer_info.name.split(', ').includes(data.name.split(',')[0])){
-            messages.push({username: data.name.split(',').pop(), content: data.message})
-			emit('emit_to_branch', {name: data.name.split(',').pop(), message: data.message})
+        if (data.name == props.peer_info.name){
+            emit('emit_to_group', [props.peer_info,{username: data.name, content: data.message}])
+            messages.push({username: data.name, content: data.message})
         }
         if (!said_hi && data.message== "Hello. We are connected. Chat way."){
             said_hi = true

@@ -39,7 +39,7 @@ app.post("/checkInvite", (request, response) => {
   let name = request.body.self_name
   let out = []
   for (let i=0; i<invitations.length; i++){
-    if (invitations[i].target_name == name){
+    if (invitations[i].target_name.includes(name)){
       out.push(invitations[i])
     }
   }
@@ -65,7 +65,7 @@ app.post("/checkConfInvite", (request, response) => {
   let name = request.body.self_name
   let out = []
   for (let i=0; i<conformations.length; i++){
-    if (conformations[i].sender_name == name){
+    if (conformations[i].sender_name[conformations[i].sender_name.length-1] == name){
       out.push(conformations[i])
     }
   }
@@ -77,6 +77,7 @@ app.get("/debug_clearRecords", (request, response) => {
   invitations = []
   conformations = []
   db.database().ref("messages").remove()
+  db.database().ref("userlist").remove()
   response.send({invitations: invitations, conformations: conformations})
 });
 
